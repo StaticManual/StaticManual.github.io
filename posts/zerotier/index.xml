@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>ZeroTier on Static Manual</title>
+    <link>http://staticmanual.github.io/posts/zerotier/</link>
+    <description>Recent content in ZeroTier on Static Manual</description>
+    <image>
+      <url>http://staticmanual.github.io/papermod-cover.png</url>
+      <link>http://staticmanual.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="http://staticmanual.github.io/posts/zerotier/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ZeroTier in Synology</title>
+      <link>http://staticmanual.github.io/posts/zerotier/zerotier_in_synology/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://staticmanual.github.io/posts/zerotier/zerotier_in_synology/</guid>
+      <description>SSH to NAS 1 sudo -i Create a persistent TUN 1 echo -e &amp;#39;#!/bin/sh -e \ninsmod /lib/modules/tun.ko&amp;#39; &amp;gt; /usr/local/etc/rc.d/tun.sh 1 chmod a+x /usr/local/etc/rc.d/tun.sh 1 /usr/local/etc/rc.d/tun.sh return ERROR or file exists can be ignored
+1 ls /dev/net/tun should return /dev/net/tun
+Set up container 1 mkdir /volume1/docker/zerotier-one 1 2 3 4 5 6 7 8 docker run -d \ --name zerotier \ --restart=always \ --device=/dev/net/tun \ --net=host \ --cap-add=NET_ADMIN \ --cap-add=SYS_ADMIN \ -v /volume1/docker/zerotier-one:/var/lib/zerotier-one zerotier/zerotier-synology:latest 1 docker exec -it zerotier zerotier-cli status 1 docker exec -it zerotier zerotier-cli join &amp;lt;your network ID&amp;gt; authorize your NAS</description>
+    </item>
+    
+    <item>
+      <title>ZeroTier Moon</title>
+      <link>http://staticmanual.github.io/posts/zerotier/zerotier_moon/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://staticmanual.github.io/posts/zerotier/zerotier_moon/</guid>
+      <description>Prerequisites:
+A server with pubilc IP addr
+Zerotier installed
+Joined your network
+Server is authorized
+On the Server 1 cd /var/lib/zerotier-one the following commands might require root
+1 zerotier-idtool initmoon identity.public &amp;gt; moon.json modify stableEndpoints in moon.json
+1 &amp;#34;stableEndpoints&amp;#34;: [&amp;#34;&amp;lt;your server IP&amp;gt;/9993&amp;#34;] 1 zerotier-idtool genmoon moon.json then a file similar to 000000xxxx.moon will be generated
+1 mkdir moons.d 1 mv 000000xxxx.moon moons.d 1 sudo systemctl restart zerotier-one run zerotier-cli peers to check whether you server is Moon now</description>
+    </item>
+    
+  </channel>
+</rss>

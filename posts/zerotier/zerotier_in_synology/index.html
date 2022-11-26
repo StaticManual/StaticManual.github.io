@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>ZeroTier in Synology | Static Manual</title>
+<meta name="keywords" content="">
+<meta name="description" content="SSH to NAS 1 sudo -i Create a persistent TUN 1 echo -e &#39;#!/bin/sh -e \ninsmod /lib/modules/tun.ko&#39; &gt; /usr/local/etc/rc.d/tun.sh 1 chmod a&#43;x /usr/local/etc/rc.d/tun.sh 1 /usr/local/etc/rc.d/tun.sh return ERROR or file exists can be ignored
+1 ls /dev/net/tun should return /dev/net/tun
+Set up container 1 mkdir /volume1/docker/zerotier-one 1 2 3 4 5 6 7 8 docker run -d \ --name zerotier \ --restart=always \ --device=/dev/net/tun \ --net=host \ --cap-add=NET_ADMIN \ --cap-add=SYS_ADMIN \ -v /volume1/docker/zerotier-one:/var/lib/zerotier-one zerotier/zerotier-synology:latest 1 docker exec -it zerotier zerotier-cli status 1 docker exec -it zerotier zerotier-cli join &lt;your network ID&gt; authorize your NAS">
+<meta name="author" content="">
+<link rel="canonical" href="http://staticmanual.github.io/posts/zerotier/zerotier_in_synology/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.4b8b7bfa5e8b459c6b8600dee1a156f41831e9846f05dbf422137ff616ddd83e.css" integrity="sha256-S4t7&#43;l6LRZxrhgDe4aFW9Bgx6YRvBdv0IhN/9hbd2D4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://staticmanual.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://staticmanual.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://staticmanual.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://staticmanual.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="http://staticmanual.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="ZeroTier in Synology" />
+<meta property="og:description" content="SSH to NAS 1 sudo -i Create a persistent TUN 1 echo -e &#39;#!/bin/sh -e \ninsmod /lib/modules/tun.ko&#39; &gt; /usr/local/etc/rc.d/tun.sh 1 chmod a&#43;x /usr/local/etc/rc.d/tun.sh 1 /usr/local/etc/rc.d/tun.sh return ERROR or file exists can be ignored
+1 ls /dev/net/tun should return /dev/net/tun
+Set up container 1 mkdir /volume1/docker/zerotier-one 1 2 3 4 5 6 7 8 docker run -d \ --name zerotier \ --restart=always \ --device=/dev/net/tun \ --net=host \ --cap-add=NET_ADMIN \ --cap-add=SYS_ADMIN \ -v /volume1/docker/zerotier-one:/var/lib/zerotier-one zerotier/zerotier-synology:latest 1 docker exec -it zerotier zerotier-cli status 1 docker exec -it zerotier zerotier-cli join &lt;your network ID&gt; authorize your NAS" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://staticmanual.github.io/posts/zerotier/zerotier_in_synology/" /><meta property="og:image" content="http://staticmanual.github.io/papermod-cover.png"/><meta property="article:section" content="posts" />
+
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://staticmanual.github.io/papermod-cover.png"/>
+
+<meta name="twitter:title" content="ZeroTier in Synology"/>
+<meta name="twitter:description" content="SSH to NAS 1 sudo -i Create a persistent TUN 1 echo -e &#39;#!/bin/sh -e \ninsmod /lib/modules/tun.ko&#39; &gt; /usr/local/etc/rc.d/tun.sh 1 chmod a&#43;x /usr/local/etc/rc.d/tun.sh 1 /usr/local/etc/rc.d/tun.sh return ERROR or file exists can be ignored
+1 ls /dev/net/tun should return /dev/net/tun
+Set up container 1 mkdir /volume1/docker/zerotier-one 1 2 3 4 5 6 7 8 docker run -d \ --name zerotier \ --restart=always \ --device=/dev/net/tun \ --net=host \ --cap-add=NET_ADMIN \ --cap-add=SYS_ADMIN \ -v /volume1/docker/zerotier-one:/var/lib/zerotier-one zerotier/zerotier-synology:latest 1 docker exec -it zerotier zerotier-cli status 1 docker exec -it zerotier zerotier-cli join &lt;your network ID&gt; authorize your NAS"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://staticmanual.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "ZeroTier",
+      "item": "http://staticmanual.github.io/posts/zerotier/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "ZeroTier in Synology",
+      "item": "http://staticmanual.github.io/posts/zerotier/zerotier_in_synology/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "ZeroTier in Synology",
+  "name": "ZeroTier in Synology",
+  "description": "SSH to NAS 1 sudo -i Create a persistent TUN 1 echo -e \u0026#39;#!/bin/sh -e \\ninsmod /lib/modules/tun.ko\u0026#39; \u0026gt; /usr/local/etc/rc.d/tun.sh 1 chmod a+x /usr/local/etc/rc.d/tun.sh 1 /usr/local/etc/rc.d/tun.sh return ERROR or file exists can be ignored\n1 ls /dev/net/tun should return /dev/net/tun\nSet up container 1 mkdir /volume1/docker/zerotier-one 1 2 3 4 5 6 7 8 docker run -d \\ --name zerotier \\ --restart=always \\ --device=/dev/net/tun \\ --net=host \\ --cap-add=NET_ADMIN \\ --cap-add=SYS_ADMIN \\ -v /volume1/docker/zerotier-one:/var/lib/zerotier-one zerotier/zerotier-synology:latest 1 docker exec -it zerotier zerotier-cli status 1 docker exec -it zerotier zerotier-cli join \u0026lt;your network ID\u0026gt; authorize your NAS",
+  "keywords": [
+    
+  ],
+  "articleBody": "SSH to NAS 1 sudo -i Create a persistent TUN 1 echo -e '#!/bin/sh -e \\ninsmod /lib/modules/tun.ko' \u003e /usr/local/etc/rc.d/tun.sh 1 chmod a+x /usr/local/etc/rc.d/tun.sh 1 /usr/local/etc/rc.d/tun.sh return ERROR or file exists can be ignored\n1 ls /dev/net/tun should return /dev/net/tun\nSet up container 1 mkdir /volume1/docker/zerotier-one 1 2 3 4 5 6 7 8 docker run -d \\ --name zerotier \\ --restart=always \\ --device=/dev/net/tun \\ --net=host \\ --cap-add=NET_ADMIN \\ --cap-add=SYS_ADMIN \\ -v /volume1/docker/zerotier-one:/var/lib/zerotier-one zerotier/zerotier-synology:latest 1 docker exec -it zerotier zerotier-cli status 1 docker exec -it zerotier zerotier-cli join authorize your NAS\n1 docker exec -it zerotier zerotier-cli listnetworks if you want to enter the docker\n1 docker exec -it zerotier sh Upgrade stop the current container\ndelete the current container\ndelete the current image\npull the latest image\nthen go back to Set up container\n",
+  "wordCount" : "137",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://staticmanual.github.io/posts/zerotier/zerotier_in_synology/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Static Manual",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://staticmanual.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://staticmanual.github.io/" accesskey="h" title="Home (Alt + H)">
+                <img src="http://staticmanual.github.io/icon.png" alt="" aria-label="logo"
+                    height="35">Home</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://staticmanual.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      ZeroTier in Synology
+    </h1>
+    <div class="post-meta">
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#ssh-to-nas" aria-label="SSH to NAS"><strong>SSH to NAS</strong></a></li>
+                <li>
+                    <a href="#create-a-persistent-tun" aria-label="Create a persistent TUN"><strong>Create a persistent TUN</strong></a></li>
+                <li>
+                    <a href="#set-up-container" aria-label="Set up container"><strong>Set up container</strong></a></li>
+                <li>
+                    <a href="#upgrade" aria-label="Upgrade"><strong>Upgrade</strong></a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h3 id="ssh-to-nas"><strong>SSH to NAS</strong><a hidden class="anchor" aria-hidden="true" href="#ssh-to-nas">#</a></h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo -i
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="create-a-persistent-tun"><strong>Create a persistent TUN</strong><a hidden class="anchor" aria-hidden="true" href="#create-a-persistent-tun">#</a></h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">echo</span> -e <span class="s1">&#39;#!/bin/sh -e \ninsmod /lib/modules/tun.ko&#39;</span> &gt; /usr/local/etc/rc.d/tun.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">chmod a+x /usr/local/etc/rc.d/tun.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">/usr/local/etc/rc.d/tun.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>return <code>ERROR</code> or <code>file exists</code> can be ignored</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ls /dev/net/tun
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>should return <code>/dev/net/tun</code></p>
+<h3 id="set-up-container"><strong>Set up container</strong><a hidden class="anchor" aria-hidden="true" href="#set-up-container">#</a></h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mkdir /volume1/docker/zerotier-one
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-docker" data-lang="docker"><span class="line"><span class="cl">docker run -d           <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --name zerotier       <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --restart<span class="o">=</span>always      <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --device<span class="o">=</span>/dev/net/tun <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --net<span class="o">=</span>host            <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --cap-add<span class="o">=</span>NET_ADMIN   <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --cap-add<span class="o">=</span>SYS_ADMIN   <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -v /volume1/docker/zerotier-one:/var/lib/zerotier-one zerotier/zerotier-synology:latest<span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker <span class="nb">exec</span> -it zerotier zerotier-cli status
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker <span class="nb">exec</span> -it zerotier zerotier-cli join &lt;your network ID&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>authorize your NAS</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker <span class="nb">exec</span> -it zerotier zerotier-cli listnetworks
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>if you want to enter the docker</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker <span class="nb">exec</span> -it zerotier sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="upgrade"><strong>Upgrade</strong><a hidden class="anchor" aria-hidden="true" href="#upgrade">#</a></h3>
+<p>stop the current container</p>
+<p>delete the current container</p>
+<p>delete the current image</p>
+<p>pull the latest image</p>
+<p>then go back to <em><strong>Set up container</strong></em></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://staticmanual.github.io/posts/ssh/ssh_key_setup/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>SSH Key Setup</span>
+  </a>
+  <a class="next" href="http://staticmanual.github.io/posts/zerotier/zerotier_moon/">
+    <span class="title">Next »</span>
+    <br>
+    <span>ZeroTier Moon</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

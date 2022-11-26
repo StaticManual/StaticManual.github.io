@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>http://staticmanual.github.io/posts/linux/add_font/</loc>
+  </url><url>
+    <loc>http://staticmanual.github.io/categories/</loc>
+  </url><url>
+    <loc>http://staticmanual.github.io/categories/linux/</loc>
+  </url><url>
+    <loc>http://staticmanual.github.io/posts/linux/</loc>
+  </url><url>
+    <loc>http://staticmanual.github.io/posts/</loc>
+  </url><url>
+    <loc>http://staticmanual.github.io/categories/rdp/</loc>
+  </url><url>
+    <loc>http://staticmanual.github.io/posts/rdp/</loc>
+  </url><url>
+    <loc>http://staticmanual.github.io/posts/rdp/rdp_setup/</loc>
+  </url><url>
+    <loc>http://staticmanual.github.io/categories/ssh/</loc>
+  </url><url>
+    <loc>http://staticmanual.github.io/posts/ssh/</loc>
+  </url><url>
+    <loc>http://staticmanual.github.io/posts/ssh/ssh_key_setup/</loc>
+  </url><url>
+    <loc>http://staticmanual.github.io/</loc>
+  </url><url>
+    <loc>http://staticmanual.github.io/categories/zerotier/</loc>
+  </url><url>
+    <loc>http://staticmanual.github.io/posts/zerotier/</loc>
+  </url><url>
+    <loc>http://staticmanual.github.io/posts/zerotier/zerotier_in_synology/</loc>
+  </url><url>
+    <loc>http://staticmanual.github.io/posts/zerotier/zerotier_moon/</loc>
+  </url>
+</urlset>

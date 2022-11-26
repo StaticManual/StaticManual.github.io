@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Linux on Static Manual</title>
+    <link>http://staticmanual.github.io/categories/linux/</link>
+    <description>Recent content in Linux on Static Manual</description>
+    <image>
+      <url>http://staticmanual.github.io/papermod-cover.png</url>
+      <link>http://staticmanual.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="http://staticmanual.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Add Font</title>
+      <link>http://staticmanual.github.io/posts/linux/add_font/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://staticmanual.github.io/posts/linux/add_font/</guid>
+      <description>download sarasa ttf zip from GitHub
+select mono and ui fonts
+1 fc-list 1 mkdir sarasa_mono_XX &amp;amp; sarasa_ui_XX copy fonts folders to ~/.fonts
+notice: chmod -R 755, or system cannot scan new fonts
+flush font cache
+1 fc-cache -fv notice: if you want to change the font of the stupid qterminal in Kali, yo should go to ~/.config/qterminal.org/qterminal.ini to manually modify it, you might cannot see new fonts in terminal font list GUI</description>
+    </item>
+    
+  </channel>
+</rss>
